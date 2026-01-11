@@ -1,0 +1,27 @@
+{
+  "name": "klaviyo_mcp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "demo:top": "ts-node src/demo/topCustomers.ts",
+    "demo:summary": "ts-node src/demo/segmentSummary.ts",
+    "demo:sms": "ts-node src/demo/smsDraft.ts",
+    "demo:cli": "ts-node src/demo/cli.ts",
+    "demo:error": "ts-node src/demo/errorHandling.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "dotenv": "^17.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.6",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

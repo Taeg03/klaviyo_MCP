@@ -9,7 +9,8 @@
     "demo:summary": "ts-node src/demo/segmentSummary.ts",
     "demo:sms": "ts-node src/demo/smsDraft.ts",
     "demo:cli": "ts-node src/demo/cli.ts",
-    "demo:error": "ts-node src/demo/errorHandling.ts"
+    "demo:error": "ts-node src/demo/errorHandling.ts",
+    "demo:agent": "ts-node src/demo/agentChat.ts"
   },
   "keywords": [],
   "author": "",

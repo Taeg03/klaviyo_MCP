@@ -98,7 +98,44 @@ npm run demo:cli -- get_top_customers "{\"region\":\"CA\",\"limit\":2}"
 
 ---
 
-## 6. Available Tools (API Reference)
+## 6. LLM-Powered Natural Language Demo 🤖
+
+**New!** This project now includes an "Agent Mode" that connects to a local/private LLM (via [Ollama](https://ollama.ai)) to understand natural language and execute the correct tools automatically.
+
+### Prerequisites for Agent Demo
+1.  **Ollama** running locally or on a network server.
+2.  **Mistral 7B** model installed (`ollama pull mistral:7b-instruct`).
+3.  **Tailscale** (optional): If your Ollama instance is on a private network, ensure you are connected.
+
+### Configuration
+Update your `.env` file if your Ollama instance is not at `localhost:11434`.
+```env
+OLLAMA_HOST=http://tailscale_ip:11434
+OLLAMA_MODEL=mistral:7b-instruct
+```
+
+### Usage
+Ask the agent anything in plain English!
+
+```bash
+# Find VIPs
+npm run demo:agent -- "find top VIP customers in California who haven't ordered in 60 days"
+
+# Analytics
+npm run demo:agent -- "summarize outerwear fans in New York who haven't bought recently"
+
+# Creative Drafting
+npm run demo:agent -- "draft an email to lapsed VIPs on the west coast with an early access offer"
+```
+
+**How it works:**
+1.  The TS script sends your query to the private Ollama endpoint.
+2.  The LLM (Mistral) decides which tool to call and extracts the parameters as JSON.
+3.  The MCP server executes the tool and returns the result.
+
+---
+
+## 7. Available Tools (API Reference)
 The following tools are exposed to the LLM:
 
 | Tool Name | Input | Description |

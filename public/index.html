@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Personal Shopping Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>MCP Personal Shopping Assistant</h1>
+        <p>Natural-language interface over Klaviyo-style data</p>
+    </div>
+</header>
+
+<div class="container main-content">
+    
+    <!-- Input Section -->
+    <div class="card input-card">
+        <label for="queryInput">Ask the assistant</label>
+        <textarea id="queryInput" placeholder="Ex: Find top customers in CA who haven't bought in 60 days..."></textarea>
+        
+        <div class="actions">
+            <button id="runBtn">Run Query</button>
+            <span id="statusText" class="status hidden">Thinking...</span>
+        </div>
+
+        <div class="hints">
+            <p>Try these:</p>
+            <ul>
+                <li>"Find top customers in CA who haven't bought in 60 days"</li>
+                <li>"Draft an email to lapsed VIPs in New York offering early access"</li>
+                <li>"Summarize outerwear fans in New York"</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="resultsArea" class="results-grid hidden">
+        
+        <!-- Tool Decision -->
+        <div class="card result-card">
+            <h3>Tool Decision</h3>
+            <pre id="toolOutput">...</pre>
+        </div>
+
+        <!-- Final Result -->
+        <div class="card result-card">
+            <h3>Assistant Result</h3>
+            <pre id="assistantOutput">...</pre>
+        </div>
+
+    </div>
+
+    <div id="errorArea" class="card error-card hidden">
+        <h3>Error</h3>
+        <pre id="errorOutput"></pre>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <p>Powered by a self-hosted Mistral 7B (Ollama) and MCP tools.</p>
+    </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

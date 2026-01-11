@@ -133,9 +133,31 @@ npm run demo:agent -- "draft an email to lapsed VIPs on the west coast with an e
 2.  The LLM (Mistral) decides which tool to call and extracts the parameters as JSON.
 3.  The MCP server executes the tool and returns the result.
 
+
 ---
 
-## 7. Available Tools (API Reference)
+## 7. Web UI (Optional Front-End Demo) 🖥️
+We also provide a modern, local web interface for judges to interact with the assistant visually.
+
+### Setup & Run
+1.  Install dependencies (if not already done):
+    ```bash
+    npm install
+    ```
+2.  Start the web server:
+    ```bash
+    npm run web:dev
+    ```
+3.  Open **[http://localhost:3000](http://localhost:3000)** in your browser.
+
+### Features
+-   Clean, internal-tool style interface.
+-   Type natural language queries directly.
+-   View the **JSON Tool Decision** (what the LLM chose) side-by-side with the **MCP Result**.
+
+---
+
+## 8. Available Tools (API Reference)
 The following tools are exposed to the LLM:
 
 | Tool Name | Input | Description |

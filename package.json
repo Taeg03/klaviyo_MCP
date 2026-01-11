@@ -10,7 +10,8 @@
     "demo:sms": "ts-node src/demo/smsDraft.ts",
     "demo:cli": "ts-node src/demo/cli.ts",
     "demo:error": "ts-node src/demo/errorHandling.ts",
-    "demo:agent": "ts-node src/demo/agentChat.ts"
+    "demo:agent": "ts-node src/demo/agentChat.ts",
+    "web:dev": "ts-node src/web/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -18,9 +19,11 @@
   "type": "commonjs",
   "dependencies": {
     "axios": "^1.13.2",
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1"
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
     "@types/node": "^25.0.6",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"

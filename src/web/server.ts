@@ -1,5 +1,5 @@
 import express from 'express';
-import { getToolCallFromOllama } from '../llm/ollamaClient';
+import { getToolCallFromLLM } from '../llm';
 import { handleRequest } from '../mcp/server';
 import path from 'path';
 import { ENV } from '../config/env'; // Ensure env is loaded
@@ -24,7 +24,7 @@ app.post('/api/agent', async (req, res) => {
 
     try {
         // 1. Get tool decision from LLM
-        const toolDecision = await getToolCallFromOllama(query);
+        const toolDecision = await getToolCallFromLLM(query);
         console.log(`[Web] Tool decision: ${toolDecision.tool}`);
 
         // 2. Execute MCP tool

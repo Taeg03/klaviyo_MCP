@@ -1,4 +1,4 @@
-import { getToolCallFromOllama } from '../llm/ollamaClient';
+import { getToolCallFromLLM } from '../llm'; // Use factory
 import { handleRequest } from '../mcp/server';
 
 async function runAgent() {
@@ -15,8 +15,8 @@ async function runAgent() {
     console.log("\n... Thinking (calling Ollama) ...\n");
 
     try {
-        // 1. Get tool call from LLM
-        const decision = await getToolCallFromOllama(query);
+        // 1. Get tool call from LLM (Abstracted)
+        const decision = await getToolCallFromLLM(query);
 
         console.log("=== LLM Tool Decision ===");
         console.log(`Tool: ${decision.tool}`);

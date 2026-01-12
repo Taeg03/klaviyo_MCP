@@ -66,7 +66,7 @@ graph TD
 ---
 
 ## 5. Usage & Demos (How to Test)
-We have provided one-command demo scripts so you can verify the functionality immediately without needing an external LLM client setup.
+I have provided one-command demo scripts so you can verify the functionality immediately without needing an external LLM client setup.
 
 ### 🏁 Quick Start: The "VIP Flow"
 Run the full end-to-end flow: finding top customers and drafting their campaign.
@@ -137,7 +137,7 @@ npm run demo:agent -- "draft an email to lapsed VIPs on the west coast with an e
 ---
 
 ## 7. Web UI (Optional Front-End Demo) 🖥️
-We also provide a modern, local web interface for judges to interact with the assistant visually.
+I also provide a modern, local web interface to interact with the assistant visually.
 
 ### Setup & Run
 1.  Install dependencies (if not already done):
@@ -155,6 +155,43 @@ We also provide a modern, local web interface for judges to interact with the as
 -   Type natural language queries directly.
 -   View the **JSON Tool Decision** (what the LLM chose) side-by-side with the **MCP Result**.
 -   **Personalization**: If you ask to "personalize" or "draft for each customer", the UI will show individual variants.
+
+---
+
+## 6.5 Bring Your Own LLM (Local, Cloud, or Hosted) 🧠
+The assistant is designed to be model-agnostic. While it defaults to **Ollama**, you can easily switch to **OpenAI** or any **Generic HTTP** endpoint (LM Studio, LocalAI, vLLM, etc.).
+
+### How to Switch
+1.  Open `.env`.
+2.  Set `LLM_PROVIDER` to one of: `ollama`, `openai`, or `http`.
+3.  Configure the corresponding variables.
+
+#### Option 1: Ollama (Default)
+```bash
+LLM_PROVIDER=ollama
+OLLAMA_HOST=http://localhost:11434
+OLLAMA_MODEL=mistral:7b-instruct
+```
+
+#### Option 2: OpenAI
+```bash
+LLM_PROVIDER=openai
+OPENAI_API_KEY=sk-...
+OPENAI_MODEL=gpt-4o
+```
+*Note: This will call `https://api.openai.com/v1/chat/completions`.*
+
+#### Option 3: Generic / Local HTTP (LM Studio, etc.)
+```bash
+LLM_PROVIDER=http
+LLM_API_URL=http://localhost:1234/v1/chat/completions
+```
+*Use this for any provider that accepts an OpenAI-compatible JSON payload.*
+
+### Mechanism
+-   The assistant only requires the LLM to return a JSON object: `{ "tool": "...", "input": { ... } }`.
+-   Any model capable of following this instruction and outputting JSON will work.
+-   MCP tools are unchanged — only the LLM wrapper changes.
 
 ---
 

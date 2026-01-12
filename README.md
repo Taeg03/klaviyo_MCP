@@ -206,3 +206,5 @@ The following tools are exposed to the LLM:
 
 ## License
 ISC
+
+This project is licensed under the ISC License. See the `LICENSE` file for details.

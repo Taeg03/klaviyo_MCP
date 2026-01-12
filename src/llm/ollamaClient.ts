@@ -29,14 +29,17 @@ Available tools:
      "minDaysSinceOrder"?: number
    }
 
-3) "create_campaign_draft"
    Use this when the user asks to DRAFT or WRITE an EMAIL or SMS, or mentions "draft", "email", "sms", or "message".
    Input shape:
    {
      "segmentDescription": string,
      "goal": string,
-     "channel": "email" | "sms"
+     "channel": "email" | "sms",
+     "personalize"?: boolean,
+     "maxCustomers"?: number
    }
+
+   Make sure to set "personalize": true if the user mentions "personalize", "tailor", "variants", or asks for specific customer drafts.
 
 IMPORTANT DECISION RULES:
 - If the user asks to "draft", "write", "email", or "sms", you MUST choose "create_campaign_draft".

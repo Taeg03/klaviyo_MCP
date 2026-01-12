@@ -154,6 +154,7 @@ We also provide a modern, local web interface for judges to interact with the as
 -   Clean, internal-tool style interface.
 -   Type natural language queries directly.
 -   View the **JSON Tool Decision** (what the LLM chose) side-by-side with the **MCP Result**.
+-   **Personalization**: If you ask to "personalize" or "draft for each customer", the UI will show individual variants.
 
 ---
 

@@ -58,7 +58,9 @@ export async function get_segment_summary(args: { category?: string; minDaysSinc
 export async function create_campaign_draft(args: {
     segmentDescription: string;
     goal: string;
-    channel: 'email' | 'sms'
+    channel: 'email' | 'sms';
+    personalize?: boolean;
+    maxCustomers?: number;
 }) {
     console.log('[MCP] create_campaign_draft called with:', args);
 
@@ -66,6 +68,37 @@ export async function create_campaign_draft(args: {
         return { error: "Missing required fields: segmentDescription, goal, channel (email|sms)" };
     }
 
+    // 1. Generate Base Draft
     const draft = generateCampaignDraft(args.segmentDescription, args.goal, args.channel);
+
+    // 2. If personalization requested, fetch customers and generate variants
+    if (args.personalize) {
+        // Simple logic: fetch top customers filtered by region if region is mentioned in segment description
+        // For hackathon simplicity, catching "NY" or "CA" etc. in description is a bonus, 
+        // but let's just grab top N customers for now or filter if we can guess region.
+
+        let regionFilter: string | undefined;
+        // Basic heuristic extraction for demo
+        if (args.segmentDescription.match(/\b(NY|New York)\b/i)) regionFilter = 'NY';
+        if (args.segmentDescription.match(/\b(CA|California)\b/i)) regionFilter = 'CA';
+
+        const limit = args.maxCustomers || 3;
+        const customers = await KlaviyoClient.getTopCustomers({ region: regionFilter, limit });
+
+        if (customers.length > 0) {
+            console.log(`[MCP] Generating personalized variants for ${customers.length} customers...`);
+            const variants = await require('../llm/personalization').generatePersonalizedDrafts(
+                draft.subjectLine,
+                draft.body,
+                args.goal,
+                customers
+            );
+            return {
+                ...draft,
+                personalizedVariants: variants
+            };
+        }
+    }
+
     return draft;
 }

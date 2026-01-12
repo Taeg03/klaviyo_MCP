@@ -12,7 +12,7 @@ async function runAgent() {
 
     console.log("=== User Query ===");
     console.log(query);
-    console.log("\n... Thinking (calling Ollama) ...\n");
+    console.log(`\n... Thinking (calling ${process.env.LLM_PROVIDER || 'LLM'})...\n`);
 
     try {
         // 1. Get tool call from LLM (Abstracted)

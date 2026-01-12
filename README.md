@@ -63,7 +63,58 @@ graph TD
 
 ---
 
-## 5. Usage & Demos (How to Test)
+## 5. Configuration & Environment Variables ⚙️
+
+This project uses `dotenv` to manage configuration. By default, it runs in **Mock Mode** using **Ollama**, so **no external API keys are required** to get started.
+
+### Environment Variables Table
+
+| Variable | Required? | Description | Default |
+| :--- | :--- | :--- | :--- |
+| `USE_MOCK_KLAVIYO` | No | `true` uses in-memory mock data. `false` calls real Klaviyo API. | `true` |
+| `KLAVIYO_API_KEY` | No* | Real Klaviyo Private API Key (pk_...). *Required only if `USE_MOCK_KLAVIYO=false`. | - |
+| `PORT` | No | Port for the Web UI server. | `3000` |
+| `LLM_PROVIDER` | No | Which LLM to use: `ollama`, `openai`, or `http`. | `ollama` |
+| `OLLAMA_HOST` | No | URL of your Ollama instance. | `http://localhost:11434` |
+| `OLLAMA_MODEL` | No | Model to use with Ollama. | `mistral:7b-instruct` |
+| `OPENAI_API_KEY` | No* | OpenAI API Key (sk-...). *Required only if `LLM_PROVIDER=openai`. | - |
+| `OPENAI_MODEL` | No | OpenAI Model (e.g. gpt-4o, gpt-3.5-turbo). | `gpt-3.5-turbo` |
+| `LLM_API_URL` | No* | Custom endpoint URL. *Required only if `LLM_PROVIDER=http`. | - |
+
+### Example Configurations
+
+You can copy `.env.example` to `.env` and adjust as needed.
+
+#### 1. Default (Mock Data + Local Ollama)
+Safe, free, and private. Recommended for testing.
+```env
+USE_MOCK_KLAVIYO=true
+LLM_PROVIDER=ollama
+OLLAMA_HOST=http://localhost:11434
+OLLAMA_MODEL=mistral:7b-instruct
+```
+
+#### 2. OpenAI Mode (Bring Your Own Key)
+Uses OpenAI for higher quality reasoning.
+```env
+USE_MOCK_KLAVIYO=true
+LLM_PROVIDER=openai
+OPENAI_API_KEY=sk-your-actual-api-key
+OPENAI_MODEL=gpt-4o
+```
+> **⚠️ WARNING:** Never commit your `.env` file containing real API keys!
+
+#### 3. Real Klaviyo Data (Production-like)
+Connects to a live Klaviyo account.
+```env
+USE_MOCK_KLAVIYO=false
+KLAVIYO_API_KEY=pk_your_private_key
+LLM_PROVIDER=ollama
+```
+
+---
+
+## 6. Usage & Demos (How to Test)
 I have provided one-command demo scripts so you can verify the functionality immediately without needing an external LLM client setup.
 
 ### 🏁 Quick Start: The "VIP Flow"
@@ -96,24 +147,26 @@ npm run demo:cli -- get_top_customers "{\"region\":\"CA\",\"limit\":2}"
 
 ---
 
-## 6. LLM-Powered Natural Language Demo 🤖
+## 6. LLM-Powered Agent Mode 🤖 (Bring Your Own LLM)
 
-This project includes an "Agent Mode" that connects to a local/private LLM (via [Ollama](https://ollama.ai)) to understand natural language and execute the correct tools automatically.
+**Disclaimer:** This project does **NOT** include access to a hosted model. You must run your own LLM (e.g., Ollama, OpenAI, LF) to use Agent Mode. The project runs in **Mock Mode** by default effectively without an LLM.
+
+This mode allows you to connect to **your local or private LLM** to understand natural language and execute the correct tools automatically.
 
 ### Prerequisites for Agent Demo
-1.  **Ollama** running locally or on a network server.
-2.  **Mistral 7B** model installed (`ollama pull mistral:7b-instruct`).
-3.  **Tailscale** (optional): If your Ollama instance is on a private network, ensure you are connected.
+1.  **Ollama** running locally or on a network server (or another supported provider).
+2.  A model installed (e.g., `ollama pull mistral:7b-instruct`).
 
 ### Configuration
 Update your `.env` file if your Ollama instance is not at `localhost:11434`.
 ```env
-OLLAMA_HOST=http://tailscale_ip:11434
+OLLAMA_HOST=http://<your-host-ip>:11434
 OLLAMA_MODEL=mistral:7b-instruct
 ```
 
+
 ### Usage
-Ask the agent anything in plain English!
+Ensure your LLM is running, then ask the agent anything in plain English!
 
 ```bash
 # Find VIPs

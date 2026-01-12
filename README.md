@@ -25,14 +25,14 @@ The project implements the **Model Context Protocol (MCP)**, allowing any MCP-co
 
 ```mermaid
 graph TD
-    User[Merchant / LLM Client] -->|Natural Language| MCP
+    User["Merchant / LLM Client"] -->|Natural Language| MCP
     subgraph "MCP Shopping Assistant"
         MCP[MCP Server] -->|Router| Tools
-        Tools -->|Query| Logic[Business Logic & Analytics]
+        Tools -->|Query| Logic["Business Logic & Analytics"]
         Logic -->|Draft| Gen[Campaign Generator]
         
         Logic -.->|Read Data| Client{Klaviyo Client}
-        Client -->|Option A| Mock[Mock Data (In-Memory)]
+        Client -->|Option A| Mock["Mock Data (In-Memory)"]
         Client -->|Option B| Real[Real Klaviyo API]
     end
 ```

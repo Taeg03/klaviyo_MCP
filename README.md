@@ -98,7 +98,7 @@ npm run demo:cli -- get_top_customers "{\"region\":\"CA\",\"limit\":2}"
 
 ## 6. LLM-Powered Natural Language Demo 🤖
 
-**New!** This project now includes an "Agent Mode" that connects to a local/private LLM (via [Ollama](https://ollama.ai)) to understand natural language and execute the correct tools automatically.
+This project includes an "Agent Mode" that connects to a local/private LLM (via [Ollama](https://ollama.ai)) to understand natural language and execute the correct tools automatically.
 
 ### Prerequisites for Agent Demo
 1.  **Ollama** running locally or on a network server.
@@ -131,28 +131,6 @@ npm run demo:agent -- "draft an email to lapsed VIPs on the west coast with an e
 2.  The LLM (Mistral) decides which tool to call and extracts the parameters as JSON.
 3.  The MCP server executes the tool and returns the result.
 
-
----
-
-## 7. Web UI (Optional Front-End Demo) 🖥️
-I also provide a modern, local web interface to interact with the assistant visually.
-
-### Setup & Run
-1.  Install dependencies (if not already done):
-    ```bash
-    npm install
-    ```
-2.  Start the web server:
-    ```bash
-    npm run web:dev
-    ```
-3.  Open **[http://localhost:3000](http://localhost:3000)** in your browser.
-
-### Features
--   Clean, internal-tool style interface.
--   Type natural language queries directly.
--   View the **JSON Tool Decision** (what the LLM chose) side-by-side with the **MCP Result**.
--   **Personalization**: If you ask to "personalize" or "draft for each customer", the UI will show individual variants.
 
 ---
 
@@ -190,6 +168,28 @@ LLM_API_URL=http://localhost:1234/v1/chat/completions
 -   The assistant only requires the LLM to return a JSON object: `{ "tool": "...", "input": { ... } }`.
 -   Any model capable of following this instruction and outputting JSON will work.
 -   MCP tools are unchanged — only the LLM wrapper changes.
+
+---
+
+## 7. Web UI (Optional Front-End Demo) 🖥️
+I also provide a modern, local web interface to interact with the assistant visually.
+
+### Setup & Run
+1.  Install dependencies (if not already done):
+    ```bash
+    npm install
+    ```
+2.  Start the web server:
+    ```bash
+    npm run web:dev
+    ```
+3.  Open **[http://localhost:3000](http://localhost:3000)** in your browser.
+
+### Features
+-   Clean, internal-tool style interface.
+-   Type natural language queries directly.
+-   View the **JSON Tool Decision** (what the LLM chose) side-by-side with the **MCP Result**.
+-   **Personalization**: If you ask to "personalize" or "draft for each customer", the UI will show individual variants.
 
 ---
 
